@@ -10,13 +10,18 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import * as myExtension from '../extension';
-import { search } from '../nuget';
+import { search, getVersions } from '../nuget';
 
 
 // Defines a Mocha test suite to group tests of similar kind together
 suite("NuGet Tests", () => {   
-    test("ShouldFindAutoMapper", async () => {
+    test("ShouldFindKnownPackage", async () => {
         var result = await search("AutoMapper");
         assert.notEqual(result.indexOf("AutoMapper"),-1);
-    })
+    });
+
+    test("ShouldGetPackageVersion", async () => {
+        var result = await getVersions("AutoMapper");
+        assert.notEqual(result.indexOf("6.2.2"), -1);
+    });
 });
