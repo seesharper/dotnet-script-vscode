@@ -16,17 +16,17 @@ import { search, getVersions } from '../nuget';
 // Defines a Mocha test suite to group tests of similar kind together
 suite("NuGet Tests", () => {   
     test("ShouldFindKnownPackage", async () => {
-        var result = await search("AutoMapper");
+        let result = await search("AutoMapper");
         assert.notEqual(result.indexOf("AutoMapper"),-1);
     });
 
     test("ShouldReturnEmptyListForUnknownPackage", async () => {
-        var result = await search("UnknownPackage");
+        let result = await search("UnknownPackage");        
         assert.ok(result.length == 0);
     });
 
     test("ShouldGetPackageVersion", async () => {
-        var result = await getVersions("AutoMapper");
+        let result = await getVersions("AutoMapper");
         assert.notEqual(result.indexOf("6.2.2"), -1);
     });
 });
