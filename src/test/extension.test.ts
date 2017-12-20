@@ -20,6 +20,11 @@ suite("NuGet Tests", () => {
         assert.notEqual(result.indexOf("AutoMapper"),-1);
     });
 
+    test("ShouldReturnEmptyListForUnknownPackage", async () => {
+        var result = await search("UnknownPackage");
+        assert.ok(result.length == 0);
+    });
+
     test("ShouldGetPackageVersion", async () => {
         var result = await getVersions("AutoMapper");
         assert.notEqual(result.indexOf("6.2.2"), -1);
