@@ -11,22 +11,42 @@ import * as assert from 'assert';
 import * as vscode from 'vscode';
 import * as myExtension from '../extension';
 import { search, getVersions } from '../nuget';
+import  parseReferences  from '../parsing/scriptParser';
+import {EOL} from 'os';
 
+// // Defines a Mocha test suite to group tests of similar kind together
+// suite("NuGet Tests", () => {   
+//     test("ShouldFindKnownPackage", async () => {
+//         let result = await search("AutoMapper");
+//         assert.notEqual(result.indexOf("AutoMapper"),-1);
+//     });
+
+//     test("ShouldReturnEmptyListForUnknownPackage", async () => {
+//         let result = await search("UnknownPackage");        
+//         assert.ok(result.length == 0);
+//     });
+
+//     test("ShouldGetPackageVersion", async () => {
+//         let result = await getVersions("AutoMapper");
+//         assert.notEqual(result.indexOf("6.2.2"), -1);
+//     });
+// });
 
 // Defines a Mocha test suite to group tests of similar kind together
-suite("NuGet Tests", () => {   
-    test("ShouldFindKnownPackage", async () => {
-        let result = await search("AutoMapper");
-        assert.notEqual(result.indexOf("AutoMapper"),-1);
+suite("Script Parser Tests", () => {   
+    test("ShouldResolveSinglePackage", async () => {
+        let result = await parseReferences(`#r "nuget:Package, 1.2.3"`);
+        assert.ok(result.find(r => r.id == 'Package') != null);
+    });
+    
+    test("ShouldResolveMultiplePackages", async () => {
+        let code = '#r "nuget:Package, 1.2.3"';
+        code = code + `${EOL}` + '#r "nuget:AnotherPackage, 1.2.3"';
+        
+        let result = await parseReferences(code);
+        assert.ok(result.find(r => r.id == 'Package') != null);
+        assert.ok(result.find(r => r.id == 'AnotherPackage') != null);        
     });
 
-    test("ShouldReturnEmptyListForUnknownPackage", async () => {
-        let result = await search("UnknownPackage");        
-        assert.ok(result.length == 0);
-    });
 
-    test("ShouldGetPackageVersion", async () => {
-        let result = await getVersions("AutoMapper");
-        assert.notEqual(result.indexOf("6.2.2"), -1);
-    });
 });

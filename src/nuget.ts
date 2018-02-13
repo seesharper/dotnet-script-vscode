@@ -3,17 +3,17 @@ import { stringify } from 'querystring';
 
 
 export async function search(searchTerm:string) : Promise<string[]>{        
-    var queryString = stringify({q : searchTerm});
-    var requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
-    var response = await fetch(requestUrl);
-    var json = await response.json();    
+    let queryString = stringify({q : searchTerm});
+    let requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
+    let response = await fetch(requestUrl);
+    let json = await response.json();    
     return json.data;
 }
 
 export async function getVersions(packageId : string) :Promise<string[]>{
-    var queryString = stringify({id : packageId});
-    var requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
-    var response = await fetch(requestUrl);
-    var json = await response.json();
+    let queryString = stringify({id : packageId});
+    let requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
+    let response = await fetch(requestUrl);
+    let json = await response.json();
     return json.data; 
 }
