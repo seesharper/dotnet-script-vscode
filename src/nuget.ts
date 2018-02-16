@@ -1,19 +1,31 @@
-import fetch, { Request } from 'node-fetch';
-import { stringify } from 'querystring';
-
-
-export async function search(searchTerm:string) : Promise<string[]>{        
-    let queryString = stringify({q : searchTerm});
-    let requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
-    let response = await fetch(requestUrl);
-    let json = await response.json();    
-    return json.data;
+export interface PackageQuery{
+    searchTerm : string;    
+    rootFolder : string; 
+    includePreRelease : boolean;    
 }
-
-export async function getVersions(packageId : string) :Promise<string[]>{
-    let queryString = stringify({id : packageId});
-    let requestUrl =  `https://api-v2v3search-0.nuget.org/autocomplete?${queryString}`;
-    let response = await fetch(requestUrl);
-    let json = await response.json();
-    return json.data; 
+/**
+ * 
+ * 
+ * @export
+ * @interface PackageQueryResult
+ */
+export interface PackageQueryResult{
+    /**
+     * The identify of the package
+     * 
+     * @type {string}
+     * @memberof PackageQueryResult
+     */
+    id : string;
+    /**
+     * The description of the package
+     * 
+     * @type {string}
+     * @memberof PackageQueryResult
+     */
+    description : string;
+    downloadCount : number;
+    source : string;
+    sourceUrl : string;    
+    versions : string[];
 }

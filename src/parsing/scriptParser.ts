@@ -16,7 +16,7 @@ export default function parseNuGetReferences(script : string) : NuGetReference[]
         reference.id = myArray[1];
         reference.version = myArray[2];
         
-        let test = sm.parse("1.2.3.4");
+        let test = sm.parse("1.2.3.4", true);
 
         result.push(reference);
     }       

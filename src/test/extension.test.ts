@@ -10,9 +10,10 @@ import * as assert from 'assert';
 // as well as import your extension to test it
 import * as vscode from 'vscode';
 import * as myExtension from '../extension';
-import { search, getVersions } from '../nuget';
+import {PackageQuery, PackageQueryResult } from '../nuget';
 import  parseReferences  from '../parsing/scriptParser';
 import {EOL} from 'os';
+import { Server } from '../server';
 
 // // Defines a Mocha test suite to group tests of similar kind together
 // suite("NuGet Tests", () => {   
@@ -47,6 +48,16 @@ suite("Script Parser Tests", () => {
         assert.ok(result.find(r => r.id == 'Package') != null);
         assert.ok(result.find(r => r.id == 'AnotherPackage') != null);        
     });
-
-
 });
+
+// suite("Server Tests", () => {
+//     test("ShouldHandlePackageQuery", async () => {                
+        
+//         let server : Server = new Server();
+//         await server.start();
+//         let packageQuery : PackageQuery = { rootFolder:vscode.workspace.rootPath, searchTerm:"LightInject", includePreRelease:true };
+//         let response = await server.execute(packageQuery, "PackageQuery");
+//         let packageQueryResults : PackageQueryResult[] = response.PayLoad;
+        
+//     }).timeout(5000);
+// });
