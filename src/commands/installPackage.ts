@@ -1,11 +1,10 @@
 import * as vscode from 'vscode';
-// import { ShellExecution, TextEdit, WorkspaceEdit } from 'vscode';
 import { PackageQuery, PackageQueryResult } from '../nuget';
 import { EOL } from 'os';
 import { Server } from '../server';
 
 export async function installPackage(server : Server) : Promise<void>{
-             
+                     
     let searchTerm = await vscode.window.showInputBox({placeHolder : 'Package search'});
     if (searchTerm == undefined)
     {
@@ -42,7 +41,8 @@ export async function installPackage(server : Server) : Promise<void>{
         editBuilder.insert(new vscode.Position(1,0),inlineNuGetReference);            
     });
 
-    //Hack for now. Restarting OmniSharp too soon makes it  
+    //Hack for now. We need to wait a "little" before starting OmniSharp.
+    //A direct restart kills intellisense.  
     const delay = time => new Promise(res=>setTimeout(()=>res(),time));
     await vscode.window.activeTextEditor.document.save();
     await delay(500);
@@ -51,8 +51,13 @@ export async function installPackage(server : Server) : Promise<void>{
 
     async function search(term: string) : Promise<PackageQueryResult[]>
     {
+        let progressOption : vscode.ProgressOptions = {location :vscode.ProgressLocation.Window };    
         let packageQuery : PackageQuery = {searchTerm : term,includePreRelease : true, rootFolder : vscode.workspace.rootPath};
-        let response = await server.execute(packageQuery, "PackageQuery");        
+        
+        let response = await vscode.window.withProgress(progressOption,progress => { 
+            progress.report({message: `Searching for package ${term}`});
+            return server.execute(packageQuery, "PackageQuery");
+        });                        
         
         if (response.isSuccessful)
         {            

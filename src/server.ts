@@ -1,6 +1,8 @@
 import {ChildProcess,spawn} from 'child_process';
 import { Request, Response } from './messaging/request';
 import {ReadLine, createInterface} from 'readline';
+import {join} from 'path';
+import { Logger } from './logger';
 
 type ResponseCallBack = (response : Response) => void;
 
@@ -16,10 +18,18 @@ export class Server
 
     private _waiting: Map<number, ResponseCallBack> = new Map<number, ResponseCallBack>();
 
-    
-    start() : void
-    {
-        this._serverProcess = spawn("dotnet", ["C:/Github/Dotnet.Script.Server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0/Dotnet.Script.Server.Stdio.dll"]);
+    private _logger : Logger;
+
+    constructor(){
+        this._logger = new Logger();
+    }
+
+    start(folder : string) : void
+    {                
+        this._logger.writeLine(`Starting server from ${folder}`);
+        
+        let path = join(folder,"Dotnet.Script.Server.Stdio.dll");
+        this._serverProcess = spawn("dotnet", [path]);
         this._readLine = createInterface({
             input: this._serverProcess.stdout,
             output: this._serverProcess.stdin,
@@ -27,7 +37,6 @@ export class Server
         });
         this._readLine.on("line", line => this.processLine(line));
     }
-    
     
     private processLine(line : string){
         let response : Response = JSON.parse(line);
@@ -45,5 +54,4 @@ export class Server
         let json = JSON.stringify(request);
         this._serverProcess.stdin.write(json + '\n');
     }
-
 }

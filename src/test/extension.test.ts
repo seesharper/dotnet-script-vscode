@@ -47,7 +47,7 @@ suite("Script Parser Tests", () => {
         let result = await parseReferences(code);
         assert.ok(result.find(r => r.id == 'Package') != null);
         assert.ok(result.find(r => r.id == 'AnotherPackage') != null);        
-    });
+    });    
 });
 
 // suite("Server Tests", () => {

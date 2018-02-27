@@ -2,7 +2,11 @@
     "name": "dotnet-script",
     "displayName": "dotnet-script",
     "description": "Provides simple tooling when working with dotnet-script",
-    "version": "0.0.1",
+    "version": "0.0.1-beta1",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/seesharper/dotnet-script-vscode"
+    },
     "publisher": "dotnet-script",
     "engines": {
         "vscode": "^1.19.0"
@@ -21,7 +25,18 @@
                 "title": "Install NuGet package",
                 "category": "dotnet-script"
             }
-        ]
+        ],
+        "configuration" :{
+            "title": "dotnet script configuration",
+            "type" : "object",
+            "properties": {
+                "dotnet-script-server.path" :{
+                    "type" : "string",
+                    "description": "Specifies the path to the folder that contains the dotnet-script-server.",
+                    "default" : "C:/Github/Dotnet.Script.Server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0/" 
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
@@ -31,18 +46,20 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^7.0.43",
-        "tslint": "^5.8.0",
-        "typescript": "^2.6.1",
+        "@types/mocha": "^2.2.48",
+        "@types/node": "^9.4.6",
+        "tslint": "^5.9.1",
+        "typescript": "^2.7.2",
         "vscode": "^1.1.6"
     },
     "dependencies": {
-        "@types/node-fetch": "^1.6.7",
-        "@types/semver": "^5.4.0",
-        "node-fetch": "^1.7.3",
-        "semver": "^5.4.1",
-        "tslint-microsoft-contrib": "^5.0.1",
+        "@types/download": "^6.2.1",
+        "@types/extract-zip": "^1.6.2",
+        "@types/semver": "^5.5.0",
+        "download": "^6.2.5",
+        "extract-zip": "^1.6.6",
+        "semver": "^5.5.0",
+        "tslint-microsoft-contrib": "^5.0.3",
         "tslint-no-unused-expression-chai": "0.0.3"
     }
 }
