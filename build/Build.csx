@@ -13,35 +13,45 @@ var context = new BuildContext("seesharper", "dotnet-script-vscode");
 
 NPM.Install(context.PathToProjectFolder);
 
+await GenerateChangeLog();
+await GenerateReleaseNotes();
+
 ExtensionManager.Package(context.PathToProjectFolder, context.GitHubArtifactsFolder);
-if (BuildEnvironment.IsSecure)
+
+if (BuildEnvironment.IsSecure && Git.Default.IsTagCommit())
 {
-    await GenerateChangeLog();
-    await GenerateReleaseNotes();
-    if (Git.Default.IsTagCommit())
-    {
-        var releaseManager = ReleaseManagerFor(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken);        
-        var assets = new ReleaseAsset[]{new ZipReleaseAsset(context.PathToGitHubReleaseAsset)};
-        await releaseManager.CreateRelease(Git.Default.GetLatestTag(),context.PathToReleaseNotes, assets);
-    }
+    await CreateGitHubRelease();
+}
+
+async Task CreateGitHubRelease()
+{
+    var releaseManager = ReleaseManagerFor(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken);
+    var assets = new ReleaseAsset[] { new ZipReleaseAsset(context.PathToGitHubReleaseAsset) };
+    await releaseManager.CreateRelease(Git.Default.GetLatestTag(), context.PathToReleaseNotes, assets);
 }
 
 async Task GenerateChangeLog()
 {
-    var changeLogGenerator = ChangeLogFrom(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken);
-    if (!Git.Default.IsTagCommit())
+    if (BuildEnvironment.IsSecure)
     {
-        changeLogGenerator = changeLogGenerator.IncludeUnreleased();
+        var changeLogGenerator = ChangeLogFrom(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken);
+        if (!Git.Default.IsTagCommit())
+        {
+            changeLogGenerator = changeLogGenerator.IncludeUnreleased();
+        }
+        await changeLogGenerator.Generate(context.PathToChangeLog);
     }
-    await changeLogGenerator.Generate(context.PathToChangeLog);
 }
 
 async Task GenerateReleaseNotes()
 {
-    var changeLogGenerator = ChangeLogFrom(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken).SinceLatestTag();
-    if (!Git.Default.IsTagCommit())
+    if (BuildEnvironment.IsSecure)
     {
-        changeLogGenerator = changeLogGenerator.IncludeUnreleased();
+        var changeLogGenerator = ChangeLogFrom(context.Owner, context.ProjectName, BuildEnvironment.GitHubAccessToken).SinceLatestTag();
+        if (!Git.Default.IsTagCommit())
+        {
+            changeLogGenerator = changeLogGenerator.IncludeUnreleased();
+        }
+        await changeLogGenerator.Generate(context.PathToReleaseNotes);
     }
-    await changeLogGenerator.Generate(context.PathToReleaseNotes);
 }

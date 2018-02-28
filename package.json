@@ -2,7 +2,7 @@
     "name": "dotnet-script-vscode",
     "displayName": "dotnet-script-vscode",
     "description": "Provides simple tooling when working with dotnet-script",
-    "version": "0.0.1-beta1",
+    "version": "0.0.1-beta2",
     "license": "MIT",
     "repository": {
         "type": "git",
