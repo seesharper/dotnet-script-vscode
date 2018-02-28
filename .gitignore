@@ -1,4 +1,6 @@
 out
 node_modules
 .vscode-test/
-.vsix
+*.vsix
+dotnet-script-server
+CHANGELOG.md
