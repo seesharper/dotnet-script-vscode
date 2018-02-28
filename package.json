@@ -34,7 +34,7 @@
                 "dotnet-script-server.path": {
                     "type": "string",
                     "description": "Specifies the path to the folder that contains the dotnet-script-server.",
-                    "default": "C:/Github/Dotnet.Script.Server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0/"
+                    "default": null
                 }
             }
         }
