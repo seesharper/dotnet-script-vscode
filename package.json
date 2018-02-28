@@ -1,8 +1,9 @@
 {
-    "name": "dotnet-script",
-    "displayName": "dotnet-script",
+    "name": "dotnet-script-vscode",
+    "displayName": "dotnet-script-vscode",
     "description": "Provides simple tooling when working with dotnet-script",
     "version": "0.0.1-beta1",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/seesharper/dotnet-script-vscode"
