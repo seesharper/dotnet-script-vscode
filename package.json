@@ -26,14 +26,14 @@
                 "category": "dotnet-script"
             }
         ],
-        "configuration" :{
+        "configuration": {
             "title": "dotnet script configuration",
-            "type" : "object",
+            "type": "object",
             "properties": {
-                "dotnet-script-server.path" :{
-                    "type" : "string",
+                "dotnet-script-server.path": {
+                    "type": "string",
                     "description": "Specifies the path to the folder that contains the dotnet-script-server.",
-                    "default" : "C:/Github/Dotnet.Script.Server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0/" 
+                    "default": "C:/Github/Dotnet.Script.Server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0/"
                 }
             }
         }
