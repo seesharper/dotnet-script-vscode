@@ -4,3 +4,4 @@ node_modules
 *.vsix
 dotnet-script-server
 CHANGELOG.md
+./build/Artifacts

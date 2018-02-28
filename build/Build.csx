@@ -3,12 +3,16 @@
 #load "nuget:Dotnet.Build, 0.2.3"
 #load "./ExtensionManager.csx"
 #load "./BuildContext.csx"
+#load "NPM.csx"
 
 using static FileUtils;
 using static ChangeLog;
 using static ReleaseManagement;
 
 var context = new BuildContext("seesharper", "dotnet-script-vscode");
+
+NPM.Install(context.PathToProjectFolder);
+
 ExtensionManager.Package(context.PathToProjectFolder, context.GitHubArtifactsFolder);
 if (BuildEnvironment.IsSecure)
 {

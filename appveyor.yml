@@ -13,8 +13,8 @@ build_script:
     dotnet script build.csx
 
 artifacts:
-- path: /**/*.nupkg
-  name: NuGet Packages
+- path: /**/*.vsix
+  name: Extensions Packages
 
 test: off
 environment:
