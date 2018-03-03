@@ -7,6 +7,7 @@ import { start } from 'repl';
 import {EOL} from 'os';
 import { sep, join } from 'path';
 import { installPackage } from './commands/installPackage';
+import { addTestScript } from './commands/addTestScript';
 import {ChildProcess, exec, execSync, spawn, SpawnOptions} from 'child_process';
 import {Request} from './messaging/request';
 import { Server } from './server';
@@ -35,7 +36,11 @@ export async function activate(context: vscode.ExtensionContext) {
     let installPackageSubscription = vscode.commands.registerCommand('extension.dotnetScriptInstallPackage', async () => {
         await installPackage(server);
     });
-     
+    
+    let addTestScriptSubscription = vscode.commands.registerCommand('extension.dotnetScriptAddTestScript', async (resourceUri) => {
+        await addTestScript(resourceUri, server);        
+    });
+    
     context.subscriptions.push(installPackageSubscription);    
 }
 

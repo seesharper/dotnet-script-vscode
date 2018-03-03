@@ -2,7 +2,7 @@
     "name": "dotnet-script-vscode",
     "displayName": "dotnet-script-vscode",
     "description": "Provides simple tooling when working with dotnet-script",
-    "version": "0.0.1-beta2",
+    "version": "0.0.1-beta3",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -24,9 +24,37 @@
             {
                 "command": "extension.dotnetScriptInstallPackage",
                 "title": "Install NuGet package",
+                "category": "dotnet-script"                
+            },
+            {
+                "command": "extension.dotnetScriptAddTestScript",
+                "title": "New Script Unit Test",
                 "category": "dotnet-script"
             }
         ],
+        "menus": {
+            "explorer/context": [
+                {                    
+                    "command": "extension.dotnetScriptAddTestScript",
+                    "group": "dotnet-script"
+                },
+                {
+                    "when": "resourceLangId == csharp",
+                    "command": "extension.dotnetScriptInstallPackage",
+                    "group": "dotnet-script"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.dotnetScriptAddTestScript",
+                    "when": "1 == 2"
+                },
+                {
+                    "command": "extension.dotnetScriptInstallPackage",
+                    "when": "resourceLangId == csharp"
+                }
+            ]
+        },
         "configuration": {
             "title": "dotnet script configuration",
             "type": "object",
