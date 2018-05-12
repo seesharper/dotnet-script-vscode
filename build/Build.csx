@@ -11,6 +11,11 @@ using static ReleaseManagement;
 
 var context = new BuildContext("seesharper", "dotnet-script-vscode");
 
+using (File.Create(Path.Combine(context.PathToProjectFolder,"firstTimeExperience")))
+{
+}
+
+
 NPM.Install(context.PathToProjectFolder);
 
 await GenerateChangeLog();

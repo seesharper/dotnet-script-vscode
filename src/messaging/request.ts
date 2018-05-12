@@ -5,9 +5,6 @@ export interface Request
     payLoad : any;       
 }
 
-
-
-
 export interface Response
 {
     id : number;

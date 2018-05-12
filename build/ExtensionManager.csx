@@ -19,5 +19,6 @@ public static class ExtensionManager
         Command.Execute("cmd", $"/c vsce package", projectFolder);
         var vsixFile = Directory.GetFiles(projectFolder, "*.vsix").Single();
         File.Copy(vsixFile, Path.Combine(outputFolder, Path.GetFileName(vsixFile)), true);
+        File.Delete(vsixFile);
     }    
 }

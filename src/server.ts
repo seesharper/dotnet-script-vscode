@@ -4,6 +4,7 @@ import {ReadLine, createInterface} from 'readline';
 import {join} from 'path';
 import { Logger } from './logger';
 
+
 type ResponseCallBack = (response : Response) => void;
 
 type RejectCallBack = () => string;
@@ -21,12 +22,12 @@ export class Server
     private _logger : Logger;
 
     constructor(){
-        this._logger = new Logger();
+        this._logger = new Logger("Server");
     }
 
     start(folder : string) : void
     {                
-        this._logger.writeLine(`Starting server from ${folder}`);
+        this._logger.logInfo(`Starting server from ${folder}`);
         
         let path = join(folder,"Dotnet.Script.Server.Stdio.dll");
         this._serverProcess = spawn("dotnet", [path]);
