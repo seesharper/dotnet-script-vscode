@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import { PackageQuery, PackageQueryResult } from '../nuget';
 import { EOL } from 'os';
 import { Server } from '../server';
+import {restartOmniSharp} from '../omnisharp';
 
 export async function installPackage(server : Server) : Promise<void>{
                      
@@ -41,13 +42,9 @@ export async function installPackage(server : Server) : Promise<void>{
         editBuilder.insert(new vscode.Position(1,0),inlineNuGetReference);            
     });
 
-    //Hack for now. We need to wait a "little" before starting OmniSharp.
-    //A direct restart kills intellisense.  
-    const delay = time => new Promise(res=>setTimeout(()=>res(),time));
+    
     await vscode.window.activeTextEditor.document.save();
-    await delay(500);
-                
-    await vscode.commands.executeCommand("o.restart");
+    await restartOmniSharp();
 
     async function search(term: string) : Promise<PackageQueryResult[]>
     {
