@@ -1,13 +1,15 @@
 import * as vscode from 'vscode';
+let outputchannel = vscode.window.createOutputChannel("dotnet-script-server");
 
 export class Logger{
-    private outputchannel : vscode.OutputChannel;
+    private category : string;
     
-    constructor(){
-        this.outputchannel = vscode.window.createOutputChannel("dotnet-script-server");
+    constructor(category : string){
+        this.category = category;
     }
 
-    public writeLine(message : string) : void {
-        this.outputchannel.appendLine(message);
-    }
+    public logInfo(message : string): void{
+        outputchannel.appendLine(`[Info]: ${this.category}`);
+        outputchannel.appendLine(`        ${message}`);
+    } 
 }

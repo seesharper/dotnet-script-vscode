@@ -12,7 +12,7 @@ export async function downloadAndInstall(serverPath : string) : Promise<void> {
     }    
     mkdirSync(serverPath);
     let serverZipPath = join(serverPath, "dotnetscriptserver.zip");
-    let url = "https://github.com/seesharper/dotnet-script-server/releases/download/0.1.0-beta2/Dotnet.Script.Server.0.1.0-beta2.zip";
+    let url = "https://github.com/seesharper/dotnet-script-server/releases/download/0.1.0-beta3/Dotnet.Script.Server.0.1.0-beta3.zip";
     
     await download(url,serverPath, { extract:true });
     

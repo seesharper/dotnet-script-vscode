@@ -1,8 +1,12 @@
 # Change Log
-## [Unreleased( 28.02.2018 14.51.20 )](https://github.com/seesharper/dotnet-script-vscode/tree/HEAD)
+## [0.0.1-beta2( 28.02.2018 18.34.13 )](https://github.com/seesharper/dotnet-script-vscode/tree/0.0.1-beta2)
 
-### [Full Changelog](https://github.com/seesharper/dotnet-script-vscode/compare/a7ec398745ec95d4a6d4bd6957f6fd68edbda80b...8185cddf8cdb3eb4ee23ec450d40a3cf858c516a)
+### [Full Changelog](https://github.com/seesharper/dotnet-script-vscode/compare/0.0.1-beta1...0.0.1-beta2)
 
 **Merged Pull Requests**
-* Feature/download (28.02.2018 13.51.20 +00:00) [\#1](https://github.com/seesharper/dotnet-script-vscode/pull/1) ([seesharper](https://github.com/seesharper))
+* Updated Readme.md and include changelog in package (28.02.2018 17.34.13 +00:00) [\#3](https://github.com/seesharper/dotnet-script-vscode/pull/3) ([seesharper](https://github.com/seesharper))
+
+## [Unreleased( 28.02.2018 18.34.13 )](https://github.com/seesharper/dotnet-script-vscode/tree/HEAD)
+
+### [Full Changelog](https://github.com/seesharper/dotnet-script-vscode/compare/0.0.1-beta2...acd27fe74f065a74b53c6b586042fa1edb1419da)
 

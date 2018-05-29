@@ -2,7 +2,7 @@
     "name": "dotnet-script-vscode",
     "displayName": "dotnet-script-vscode",
     "description": "Provides simple tooling when working with dotnet-script",
-    "version": "0.0.1-beta2",
+    "version": "0.0.1-beta3",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -25,8 +25,36 @@
                 "command": "extension.dotnetScriptInstallPackage",
                 "title": "Install NuGet package",
                 "category": "dotnet-script"
+            },
+            {
+                "command": "extension.dotnetScriptAddTestScript",
+                "title": "New Script Unit Test",
+                "category": "dotnet-script"
             }
         ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "extension.dotnetScriptAddTestScript",
+                    "group": "dotnet-script"
+                },
+                {
+                    "when": "resourceLangId == csharp",
+                    "command": "extension.dotnetScriptInstallPackage",
+                    "group": "dotnet-script"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "extension.dotnetScriptAddTestScript",
+                    "when": "1 == 2"
+                },
+                {
+                    "command": "extension.dotnetScriptInstallPackage",
+                    "when": "resourceLangId == csharp"
+                }
+            ]
+        },
         "configuration": {
             "title": "dotnet script configuration",
             "type": "object",
@@ -34,7 +62,7 @@
                 "dotnet-script-server.path": {
                     "type": "string",
                     "description": "Specifies the path to the folder that contains the dotnet-script-server.",
-                    "default": null
+                    "default": "/Users/bernhardrichter/GitHub/dotnet-script-server/src/Dotnet.Script.Server.Stdio/bin/Debug/netcoreapp2.0"
                 }
             }
         }
@@ -48,17 +76,20 @@
     },
     "devDependencies": {
         "@types/mocha": "^2.2.48",
-        "@types/node": "^9.4.6",
-        "tslint": "^5.9.1",
-        "typescript": "^2.7.2",
-        "vscode": "^1.1.6"
+        "@types/node": "^9.6.15",
+        "tslint": "^5.10.0",
+        "typescript": "^2.8.3",
+        "vscode": "^1.1.17"
     },
     "dependencies": {
-        "@types/download": "^6.2.1",
+        "@types/download": "^6.2.2",
         "@types/extract-zip": "^1.6.2",
+        "@types/rimraf": "^2.0.2",
         "@types/semver": "^5.5.0",
         "download": "^6.2.5",
         "extract-zip": "^1.6.6",
+        "hoek": "^5.0.3",
+        "rimraf": "^2.6.2",
         "semver": "^5.5.0",
         "tslint-microsoft-contrib": "^5.0.3",
         "tslint-no-unused-expression-chai": "0.0.3"
